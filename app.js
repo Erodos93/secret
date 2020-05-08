@@ -11,18 +11,18 @@ const ejs = require("ejs");
 app.set("view engine", "ejs");
 
 const mongoose = require("mongoose");
-// const encrypt=require("mongoose-encryption");
+const encrypt=require("mongoose-encryption");
 mongoose.connect("mongodb://localhost:27017/usersDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-const usersSchema =  mongoose.Schema({
+const usersSchema = new mongoose.Schema({
   email: String,
   password: String
 });
- // const secret="Armagedoniscoming";
+ const secret="Armagedoniscoming";
 
- // usersSchema.plugin(encrypt,{secret:secret,encryptedFields: ["password"]});
+ usersSchema.plugin(encrypt,{secret:secret,encryptedFields: ["password"]});
 
 const User = mongoose.model("User", usersSchema);
 
